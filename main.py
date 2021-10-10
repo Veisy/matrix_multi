@@ -91,7 +91,7 @@ def check_menu_input():
     return keyboard_input
 
 
-def check_dimension_input():
+def _check_dimension_input():
     while True:
         keyboard_input = input()
         try:
@@ -105,7 +105,7 @@ def check_dimension_input():
     return keyboard_input
 
 
-def check_float():
+def _check_float():
     while True:
         keyboard_input = input()
         try:
@@ -119,8 +119,8 @@ def check_float():
 
 def _enter_matrix_dimension(_message):
     print(_message)
-    row = check_dimension_input()
-    col = check_dimension_input()
+    row = _check_dimension_input()
+    col = _check_dimension_input()
     return row, col
 
 
@@ -142,9 +142,9 @@ def _enter_matrix_data(_message, _rows, _cols):
 
     for i in range(_rows):
         for j in range(_cols):
-            matrix[i][j] = check_float()
+            matrix[i][j] = _check_float()
 
-    print_matrix(_message, matrix)
+    _print_matrix(_message, matrix)
 
     return matrix
 
@@ -157,7 +157,7 @@ def enter_matrices(_first_matrix_row, _first_matrix_col, _second_matrix_row, _se
 
 def _enter_one_bound(_message):
     print(_message)
-    bound = check_float()
+    bound = _check_float()
     return bound
 
 
@@ -179,7 +179,7 @@ def _random_matrix_data(_message, _rows, _cols, _lower_bond, _upper_bond):
         for j in range(_cols):
             matrix[i][j] = random.uniform(_lower_bond, _upper_bond)
 
-    print_matrix(_message, matrix)
+    _print_matrix(_message, matrix)
     return matrix
 
 
@@ -192,7 +192,7 @@ def random_matrices(_first_matrix_row, _first_matrix_col, _second_matrix_row, _s
     return first_matrix, second_matrix
 
 
-def print_matrix(_message, _matrix):
+def _print_matrix(_message, _matrix):
     print(_message)
     print("-----------")
     for i in range(len(_matrix)):
@@ -202,7 +202,7 @@ def print_matrix(_message, _matrix):
     print("-----------\n")
 
 
-def draw_matrix(_message, _matrix):
+def _draw_matrix(_message, _matrix):
     # Draw only if elements are smaller then 100, and row-column smaller then 20.
     if not int(max(map(max, _matrix))) < 10000 \
             and len(_matrix) < 20 \
@@ -221,8 +221,8 @@ def draw_matrix(_message, _matrix):
 
 
 def print_and_draw_matrix(_message, _matrix):
-    print_matrix(_message, _matrix)
-    draw_matrix(_message, _matrix)
+    _print_matrix(_message, _matrix)
+    _draw_matrix(_message, _matrix)
 
 
 if __name__ == "__main__":
