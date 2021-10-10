@@ -19,14 +19,21 @@ def main():
 
         elif menu_input == 1 or menu_input == 2:
 
+            # First matrix dimensions are entered.
+            first_matrix_row, first_matrix_col = \
+                _enter_matrix_dimensions("Write the ROW and COLUMN of FIRST MATRIX respectively :")
+
             # Repeat until valid matrix dimensions are given.
             not_valid = True
             while not_valid:
-                # Dimensions are entered.
-                first_matrix_row, first_matrix_col, second_matrix_row, second_matrix_col = enter_dimensions()
+                # Ask for valid dimension for second matrix row. If not provided, ask again.
+                second_matrix_row = _enter_single_dimension("Write the ROW SECOND MATRIX :")
 
                 # Check if matrix multiplication is possible.
                 if first_matrix_col == second_matrix_row:
+                    # Since matrix multiplication is possible, we can ask for second matrix column.
+                    second_matrix_col = _enter_single_dimension("Write the COLUMN SECOND MATRIX :")
+
                     not_valid = False
                     print("--------------------------------------")
                     print("The Matrix is Valid. Continue..")
@@ -117,19 +124,17 @@ def _check_float():
     return keyboard_input
 
 
-def _enter_matrix_dimension(_message):
+def _enter_single_dimension(_message):
+    print(_message)
+    dimension = _check_dimension_input()
+    return dimension
+
+
+def _enter_matrix_dimensions(_message):
     print(_message)
     row = _check_dimension_input()
     col = _check_dimension_input()
     return row, col
-
-
-# Enter both matrix dimensions.
-def enter_dimensions():
-    first_row, first__col = _enter_matrix_dimension("Write the ROW and COLUMN of FIRST MATRIX respectively :")
-    second_row, second_col = _enter_matrix_dimension("Write the ROW and COLUMN of SECOND MATRIX respectively :")
-
-    return first_row, first__col, second_row, second_col
 
 
 def _initialize_matrix(_rows, _cols):
@@ -142,6 +147,7 @@ def _enter_matrix_data(_message, _rows, _cols):
 
     for i in range(_rows):
         for j in range(_cols):
+            print(f"[{i+1}][{j+1}]: ")
             matrix[i][j] = _check_float()
 
     _print_matrix(_message, matrix)
