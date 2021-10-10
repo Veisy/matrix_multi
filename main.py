@@ -1,4 +1,7 @@
 import random
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.set()
 
 
 # Entrance of the program.
@@ -40,7 +43,7 @@ def main():
                                                                       lower_bound, upper_bound)
 
                     result_matrix = matrix_multiplication(first_matrix, second_matrix)
-                    print_matrix("RESULT MATRIX: ", result_matrix)
+                    print_and_draw_matrix("RESULT MATRIX: ", result_matrix)
 
                 else:
                     print("Invalid calculation! "
@@ -60,7 +63,7 @@ def matrix_multiplication(_first_matrix, _second_matrix):
 
     # Loop over first matrix's row and second matrix's column.
     for i in range(len(_first_matrix)):
-        for j in range(len(_second_matrix[i])):
+        for j in range(len(_second_matrix[0])):
             # Multiply the values in the row of the first matrix the values in the column of the second matrix,
             # and add them all.
             # Then save this value to the row and column index of the result matrix.
@@ -182,10 +185,10 @@ def _random_matrix_data(_message, _rows, _cols, _lower_bond, _upper_bond):
 
 def random_matrices(_first_matrix_row, _first_matrix_col, _second_matrix_row, _second_matrix_col,
                     _lower_bond, _upper_bond):
-    first_matrix = _random_matrix_data("FIRST MATRIX : ",  _first_matrix_row, _first_matrix_col,
+    first_matrix = _random_matrix_data("FIRST MATRIX : ", _first_matrix_row, _first_matrix_col,
                                        _lower_bond, _upper_bond)
-    second_matrix = _random_matrix_data("SECOND MATRIX : ", _second_matrix_row, _second_matrix_col
-                                        , _lower_bond, _upper_bond)
+    second_matrix = _random_matrix_data("SECOND MATRIX : ", _second_matrix_row, _second_matrix_col,
+                                        _lower_bond, _upper_bond)
     return first_matrix, second_matrix
 
 
@@ -193,10 +196,33 @@ def print_matrix(_message, _matrix):
     print(_message)
     print("-----------")
     for i in range(len(_matrix)):
-        for j in range(len(_matrix[i])):
+        for j in range(len(_matrix[0])):
             print(str(_matrix[i][j]) + " ", end=" ")
         print()
     print("-----------\n")
+
+
+def draw_matrix(_message, _matrix):
+    # Draw only if elements are smaller then 100, and row-column smaller then 20.
+    if not int(max(map(max, _matrix))) < 10000 \
+            and len(_matrix) < 20 \
+            and len(_matrix[0]) < 20:
+        return
+
+    # Convert float array to int array.
+    result_array_as_int = _initialize_matrix(len(_matrix), len(_matrix[0]))
+    for i in range(len(_matrix)):
+        for j in range(len(_matrix[0])):
+            result_array_as_int[i][j] = int(_matrix[i][j])
+
+    sns.heatmap(result_array_as_int, annot=True, fmt="d")
+    plt.title(_message, fontsize=12)
+    plt.show()
+
+
+def print_and_draw_matrix(_message, _matrix):
+    print_matrix(_message, _matrix)
+    draw_matrix(_message, _matrix)
 
 
 if __name__ == "__main__":
