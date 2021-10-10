@@ -38,6 +38,10 @@ def main():
                         first_matrix, second_matrix = random_matrices(first_matrix_row, first_matrix_col,
                                                                       second_matrix_row, second_matrix_col,
                                                                       lower_bound, upper_bound)
+
+                    result_matrix = matrix_multiplication(first_matrix, second_matrix)
+                    print_matrix("RESULT MATRIX: ", result_matrix)
+
                 else:
                     print("Invalid calculation! "
                           "The column of column of first matrix have to be equal to row of the second matrix!")
@@ -48,6 +52,25 @@ def main():
 
 # # Functions with '_' at the beginning of their names are functions that are not used directly,
 # # but only used by other functions.
+
+# Matrix multiplication function.
+def matrix_multiplication(_first_matrix, _second_matrix):
+    # Initialize result matrix with empty fields.
+    result_matrix = _initialize_matrix(len(_first_matrix), len(_second_matrix[0]))
+
+    # Loop over first matrix's row and second matrix's column.
+    for i in range(len(_first_matrix)):
+        for j in range(len(_second_matrix[i])):
+            # Multiply the values in the row of the first matrix the values in the column of the second matrix,
+            # and add them all.
+            # Then save this value to the row and column index of the result matrix.
+            multiplied_value = 0
+            for k in range(len(_second_matrix)):
+                multiplied_value += _first_matrix[i][k] * _second_matrix[k][j]
+
+            result_matrix[i][j] = multiplied_value
+
+    return result_matrix
 
 
 # Check keyboard inputs for main menu, dimensions and matrix data.
@@ -93,17 +116,17 @@ def check_float():
 
 def _enter_matrix_dimension(_message):
     print(_message)
-    _row = check_dimension_input()
-    _col = check_dimension_input()
-    return _row, _col
+    row = check_dimension_input()
+    col = check_dimension_input()
+    return row, col
 
 
 # Enter both matrix dimensions.
 def enter_dimensions():
-    _first_row, _first__col = _enter_matrix_dimension("Write the ROW and COLUMN of FIRST MATRIX respectively :")
-    _second_row, _second_col = _enter_matrix_dimension("Write the ROW and COLUMN of SECOND MATRIX respectively :")
+    first_row, first__col = _enter_matrix_dimension("Write the ROW and COLUMN of FIRST MATRIX respectively :")
+    second_row, second_col = _enter_matrix_dimension("Write the ROW and COLUMN of SECOND MATRIX respectively :")
 
-    return _first_row, _first__col, _second_row, _second_col
+    return first_row, first__col, second_row, second_col
 
 
 def _initialize_matrix(_rows, _cols):
@@ -112,59 +135,62 @@ def _initialize_matrix(_rows, _cols):
 
 def _enter_matrix_data(_message, _rows, _cols):
     print(_message)
-    _matrix = _initialize_matrix(_rows, _cols)
+    matrix = _initialize_matrix(_rows, _cols)
 
     for i in range(_rows):
         for j in range(_cols):
-            _matrix[i][j] = check_float()
+            matrix[i][j] = check_float()
 
-    print_matrix(_matrix)
+    print_matrix(_message, matrix)
 
-    return _matrix
+    return matrix
 
 
 def enter_matrices(_first_matrix_row, _first_matrix_col, _second_matrix_row, _second_matrix_col):
-    _first_matrix = _enter_matrix_data("FIRST MATRIX : ", _first_matrix_row, _first_matrix_col)
-    _second_matrix = _enter_matrix_data("Second MATRIX : ", _second_matrix_row, _second_matrix_col)
-    return _first_matrix, _second_matrix
+    first_matrix = _enter_matrix_data("FIRST MATRIX : ", _first_matrix_row, _first_matrix_col)
+    second_matrix = _enter_matrix_data("Second MATRIX : ", _second_matrix_row, _second_matrix_col)
+    return first_matrix, second_matrix
 
 
 def _enter_one_bound(_message):
     print(_message)
-    _bound = check_float()
-    return _bound
+    bound = check_float()
+    return bound
 
 
 def enter_bounds():
     # Check if lower bound is smaller then upper bound. If not, ask again.
     while True:
-        _lower_bound = _enter_one_bound("Enter lower bound: ")
-        _upper_bound = _enter_one_bound("Enter upper bound")
-        if _lower_bound < _upper_bound:
+        lower_bound = _enter_one_bound("Enter lower bound: ")
+        upper_bound = _enter_one_bound("Enter upper bound")
+        if lower_bound < upper_bound:
             break
         print("Upper bound must be bigger than lower bound.")
-    return _lower_bound, _upper_bound
+    return lower_bound, upper_bound
 
 
-def _random_matrix_data(_rows, _cols, _lower_bond, _upper_bond):
-    _matrix = _initialize_matrix(_rows, _cols)
+def _random_matrix_data(_message, _rows, _cols, _lower_bond, _upper_bond):
+    matrix = _initialize_matrix(_rows, _cols)
 
     for i in range(_rows):
         for j in range(_cols):
-            _matrix[i][j] = random.uniform(_lower_bond, _upper_bond)
+            matrix[i][j] = random.uniform(_lower_bond, _upper_bond)
 
-    print_matrix(_matrix)
-    return _matrix
+    print_matrix(_message, matrix)
+    return matrix
 
 
 def random_matrices(_first_matrix_row, _first_matrix_col, _second_matrix_row, _second_matrix_col,
                     _lower_bond, _upper_bond):
-    _first_matrix = _random_matrix_data(_first_matrix_row, _first_matrix_col, _lower_bond, _upper_bond)
-    _second_matrix = _random_matrix_data(_second_matrix_row, _second_matrix_col, _lower_bond, _upper_bond)
-    return _first_matrix, _second_matrix
+    first_matrix = _random_matrix_data("FIRST MATRIX : ",  _first_matrix_row, _first_matrix_col,
+                                       _lower_bond, _upper_bond)
+    second_matrix = _random_matrix_data("SECOND MATRIX : ", _second_matrix_row, _second_matrix_col
+                                        , _lower_bond, _upper_bond)
+    return first_matrix, second_matrix
 
 
-def print_matrix(_matrix):
+def print_matrix(_message, _matrix):
+    print(_message)
     print("-----------")
     for i in range(len(_matrix)):
         for j in range(len(_matrix[i])):
