@@ -44,6 +44,12 @@ def main():
                     print("--------------------------------------\n")
 
 
+# # Functions are defined below.
+
+# # Functions with '_' at the beginning of their names are functions that are not used directly,
+# # but only used by other functions.
+
+
 # Check keyboard inputs for main menu, dimensions and matrix data.
 def check_menu_input():
     while True:
@@ -85,7 +91,7 @@ def check_float():
     return keyboard_input
 
 
-def enter_matrix_dimension(_message):
+def _enter_matrix_dimension(_message):
     print(_message)
     _row = check_dimension_input()
     _col = check_dimension_input()
@@ -94,63 +100,67 @@ def enter_matrix_dimension(_message):
 
 # Enter both matrix dimensions.
 def enter_dimensions():
-    _first_row, _first__col = enter_matrix_dimension("Write the ROW and COLUMN of FIRST MATRIX respectively :")
-    _second_row, _second_col = enter_matrix_dimension("Write the ROW and COLUMN of SECOND MATRIX respectively :")
+    _first_row, _first__col = _enter_matrix_dimension("Write the ROW and COLUMN of FIRST MATRIX respectively :")
+    _second_row, _second_col = _enter_matrix_dimension("Write the ROW and COLUMN of SECOND MATRIX respectively :")
 
     return _first_row, _first__col, _second_row, _second_col
 
 
-def initialize_matrix(_rows, _cols):
+def _initialize_matrix(_rows, _cols):
     return [[0 for _ in range(_cols)] for _ in range(_rows)]
 
 
-def enter_matrix_data(_message, _rows, _cols):
+def _enter_matrix_data(_message, _rows, _cols):
     print(_message)
-    _matrix = initialize_matrix(_rows, _cols)
+    _matrix = _initialize_matrix(_rows, _cols)
 
     for i in range(_rows):
         for j in range(_cols):
             _matrix[i][j] = check_float()
 
+    print_matrix(_matrix)
+
     return _matrix
 
 
 def enter_matrices(_first_matrix_row, _first_matrix_col, _second_matrix_row, _second_matrix_col):
-    _first_matrix = enter_matrix_data("FIRST MATRIX : ", _first_matrix_row, _first_matrix_col)
-    print_matrix(_first_matrix)
-    _second_matrix = enter_matrix_data("Second MATRIX : ", _second_matrix_row, _second_matrix_col)
-    print_matrix(_second_matrix)
+    _first_matrix = _enter_matrix_data("FIRST MATRIX : ", _first_matrix_row, _first_matrix_col)
+    _second_matrix = _enter_matrix_data("Second MATRIX : ", _second_matrix_row, _second_matrix_col)
     return _first_matrix, _second_matrix
 
 
-def enter_one_bound(_message):
+def _enter_one_bound(_message):
     print(_message)
     _bound = check_float()
     return _bound
 
 
 def enter_bounds():
-    _lower_bound = enter_one_bound("Enter lower bound: ")
-    _upper_bound = enter_one_bound("Enter upper bound")
+    # Check if lower bound is smaller then upper bound. If not, ask again.
+    while True:
+        _lower_bound = _enter_one_bound("Enter lower bound: ")
+        _upper_bound = _enter_one_bound("Enter upper bound")
+        if _lower_bound < _upper_bound:
+            break
+        print("Upper bound must be bigger than lower bound.")
     return _lower_bound, _upper_bound
 
 
-def random_matrix_data(_rows, _cols, _lower_bond, _upper_bond):
-    _matrix = initialize_matrix(_rows, _cols)
+def _random_matrix_data(_rows, _cols, _lower_bond, _upper_bond):
+    _matrix = _initialize_matrix(_rows, _cols)
 
     for i in range(_rows):
         for j in range(_cols):
             _matrix[i][j] = random.uniform(_lower_bond, _upper_bond)
 
+    print_matrix(_matrix)
     return _matrix
 
 
 def random_matrices(_first_matrix_row, _first_matrix_col, _second_matrix_row, _second_matrix_col,
                     _lower_bond, _upper_bond):
-    _first_matrix = random_matrix_data(_first_matrix_row, _first_matrix_col, _lower_bond, _upper_bond)
-    print_matrix(_first_matrix)
-    _second_matrix = random_matrix_data(_second_matrix_row, _second_matrix_col, _lower_bond, _upper_bond)
-    print_matrix(_second_matrix)
+    _first_matrix = _random_matrix_data(_first_matrix_row, _first_matrix_col, _lower_bond, _upper_bond)
+    _second_matrix = _random_matrix_data(_second_matrix_row, _second_matrix_col, _lower_bond, _upper_bond)
     return _first_matrix, _second_matrix
 
 
