@@ -151,7 +151,7 @@ def _enter_matrix_data(_message, _rows, _cols):
 
 def enter_matrices(_first_matrix_row, _first_matrix_col, _second_matrix_row, _second_matrix_col):
     first_matrix = _enter_matrix_data("FIRST MATRIX : ", _first_matrix_row, _first_matrix_col)
-    second_matrix = _enter_matrix_data("Second MATRIX : ", _second_matrix_row, _second_matrix_col)
+    second_matrix = _enter_matrix_data("SECOND MATRIX : ", _second_matrix_row, _second_matrix_col)
     return first_matrix, second_matrix
 
 
