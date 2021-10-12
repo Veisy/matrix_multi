@@ -3,6 +3,10 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 sns.set()
 
+# Name: V. Y. YILMAZ
+# No: 194003062
+# This is the Homework 2 of the Introduction to Algorithm course,
+# implemented in MATLAB.
 
 # Entrance of the program.
 def main():
