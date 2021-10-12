@@ -89,7 +89,7 @@ def check_menu_input():
         keyboard_input = input()
         try:
             keyboard_input = int(keyboard_input)
-            if not keyboard_input == 1 and keyboard_input == 2 and keyboard_input == 3:
+            if not (keyboard_input == 1 or keyboard_input == 2 or keyboard_input == 3):
                 raise ValueError
             break
         except ValueError:
