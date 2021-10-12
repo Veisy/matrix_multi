@@ -111,7 +111,8 @@ def _check_dimension_input(_message=""):
     return keyboard_input
 
 
-def _check_float():
+def _check_float(_message=""):
+    print(_message)
     while True:
         keyboard_input = input()
         try:
@@ -154,17 +155,11 @@ def enter_matrices(_first_matrix_row, _first_matrix_col, _second_matrix_row, _se
     return first_matrix, second_matrix
 
 
-def _enter_one_bound(_message):
-    print(_message)
-    bound = _check_float()
-    return bound
-
-
 def enter_bounds():
     # Check if lower bound is smaller then upper bound. If not, ask again.
     while True:
-        lower_bound = _enter_one_bound("Enter lower bound: ")
-        upper_bound = _enter_one_bound("Enter upper bound")
+        lower_bound = _check_float("Enter lower bound: ")
+        upper_bound = _check_float("Enter upper bound")
         if lower_bound < upper_bound:
             break
         print("Upper bound must be bigger than lower bound.")
