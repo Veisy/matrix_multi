@@ -21,7 +21,7 @@ def main():
 
             # First matrix dimensions are entered.
             first_matrix_row, first_matrix_col = \
-                _enter_matrix_dimensions("Enter the ROW and COLUMN of FIRST MATRIX respectively :")
+                enter_matrix_dimensions("Enter the ROW and COLUMN of FIRST MATRIX respectively :")
 
             # Repeat until valid matrix dimensions are given.
             not_valid = True
@@ -124,7 +124,7 @@ def _check_float(_message=""):
     return keyboard_input
 
 
-def _enter_matrix_dimensions(_message):
+def enter_matrix_dimensions(_message):
     print(_message)
     row = _check_dimension_input()
     col = _check_dimension_input()
