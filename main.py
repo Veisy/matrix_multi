@@ -21,18 +21,18 @@ def main():
 
             # First matrix dimensions are entered.
             first_matrix_row, first_matrix_col = \
-                _enter_matrix_dimensions("Write the ROW and COLUMN of FIRST MATRIX respectively :")
+                _enter_matrix_dimensions("Enter the ROW and COLUMN of FIRST MATRIX respectively :")
 
             # Repeat until valid matrix dimensions are given.
             not_valid = True
             while not_valid:
                 # Ask for valid dimension for second matrix row. If not provided, ask again.
-                second_matrix_row = _enter_single_dimension("Write the ROW SECOND MATRIX :")
+                second_matrix_row = _check_dimension_input("Enter the ROW SECOND MATRIX :")
 
                 # Check if matrix multiplication is possible.
                 if first_matrix_col == second_matrix_row:
                     # Since matrix multiplication is possible, we can ask for second matrix column.
-                    second_matrix_col = _enter_single_dimension("Write the COLUMN SECOND MATRIX :")
+                    second_matrix_col = _check_dimension_input("Enter the COLUMN SECOND MATRIX :")
 
                     not_valid = False
                     print("--------------------------------------")
@@ -95,7 +95,9 @@ def check_menu_input():
     return keyboard_input
 
 
-def _check_dimension_input():
+def _check_dimension_input(_message=""):
+    print(_message)
+
     while True:
         keyboard_input = input()
         try:
@@ -119,12 +121,6 @@ def _check_float():
             print("Please enter a number.")
 
     return keyboard_input
-
-
-def _enter_single_dimension(_message):
-    print(_message)
-    dimension = _check_dimension_input()
-    return dimension
 
 
 def _enter_matrix_dimensions(_message):
