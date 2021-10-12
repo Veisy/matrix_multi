@@ -75,7 +75,7 @@ def matrix_multiplication(_first_matrix, _second_matrix):
     # Loop over first matrix's row and second matrix's column.
     for i in range(len(_first_matrix)):
         for j in range(len(_second_matrix[0])):
-            # Multiply the values in the row of the first matrix the values in the column of the second matrix,
+            # Multiply the values in the row of the first matrix with the values in the column of the second matrix,
             # and add them all.
             # Then save this value to the row and column index of the result matrix.
             multiplied_value = 0
