@@ -14,10 +14,10 @@ def main():
         print("[3] Exit")
         menu_input = check_menu_input()
 
-        if menu_input == 3:
+        if menu_input == '3':
             repeat_main = False
 
-        elif menu_input == 1 or menu_input == 2:
+        elif menu_input == '1' or menu_input == '2':
 
             # First matrix dimensions are entered.
             first_matrix_row, first_matrix_col = \
@@ -87,13 +87,10 @@ def matrix_multiplication(_first_matrix, _second_matrix):
 def check_menu_input():
     while True:
         keyboard_input = input()
-        try:
-            keyboard_input = int(keyboard_input)
-            if not (keyboard_input == 1 or keyboard_input == 2 or keyboard_input == 3):
-                raise ValueError
-            break
-        except ValueError:
+        if not (keyboard_input == '1' or keyboard_input == '2' or keyboard_input == '3'):
             print("Please enter a number between 1-3")
+        else:
+            break
 
     return keyboard_input
 
