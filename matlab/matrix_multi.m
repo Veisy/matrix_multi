@@ -60,15 +60,15 @@ while repeatMain
                 resultMatrix = matrixMultiplication ...
                     (firstMatrix, secondMatrix);
                 printMatrix('RESULT MATRIX: ', resultMatrix)
-            
+                
+            else
+                disp('Invalid calculation!')
+                disp('The column of column of first matrix have to be ')
+                disp('equal to row of the second matrix!')
+                disp('--------------------------------------')
+                disp('')
             end
         end
-    else
-        disp('Invalid calculation!')
-        disp('The column of column of first matrix have to be ')
-        disp('equal to row of the second matrix!')
-        disp('--------------------------------------')
-        disp('')
     end
 end
 
