@@ -8,6 +8,7 @@ sns.set()
 # This is the Homework 2 of the Introduction to Algorithm course,
 # implemented in MATLAB.
 
+
 # Entrance of the program.
 def main():
     repeat_main = True
@@ -43,7 +44,7 @@ def main():
                     print("The Matrix is Valid. Continue..")
 
                     # Manual matrix entrance.
-                    if menu_input == 1:
+                    if menu_input == '1':
                         first_matrix, second_matrix = enter_matrices(first_matrix_row, first_matrix_col,
                                                                      second_matrix_row, second_matrix_col)
                     # Random matrices.
